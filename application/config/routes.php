@@ -1,41 +1,27 @@
 <?php
 return [
-    '' => [
-        'controller' => 'main',
+    'page/{id:\d+}' => [
+        'controller' => 'news',
         'action' => 'index',
     ],
-    'about' => [
-        'controller' => 'main',
-        'action' => 'about',
+    '' => [
+        'controller' => 'news',
+        'action' => 'index',
     ],
-    'contact' => [
-        'controller' => 'main',
-        'action' => 'contact',
-
+    'news/show/{id:\d+}' => [
+        'controller' => 'news',
+        'action' => 'show',
     ],
-    'post' => [
-        'controller' => 'main',
-        'action' => 'post',
+    'news/create' => [
+        'controller' => 'news',
+        'action' => 'create',
     ],
-    'admin/login' => [
-        'controller' => 'admin',
-        'action' => 'login',
-    ],
-    'admin/logout' => [
-        'controller' => 'admin',
-        'action' => 'logout',
-    ],
-    'admin/add' => [
-        'controller' => 'admin',
-        'action' => 'add',
-    ],
-    'admin/edit' => [
-        'controller' => 'admin',
+    'news/edit/{id:\d+}' => [
+        'controller' => 'news',
         'action' => 'edit',
     ],
-    'admin/delete' => [
-        'controller' => 'admin',
+    'news/delete/{id:\d+}' => [
+        'controller' => 'news',
         'action' => 'delete',
     ],
-
 ];

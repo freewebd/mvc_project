@@ -6,7 +6,7 @@ use application\core\View;
 
 class Router
 {
-    protected $routers = [];
+    protected $routes = [];
     protected $params = [];
     function __construct()
     {
@@ -17,16 +17,22 @@ class Router
     }
     public function add($route, $params)
     {
+        $route = preg_replace('/{([a-z]+):([^\}]+)}/', '(?P<\1>\2)', $route);
         $route = '#^' . $route . '$#';
-        $this->routers[$route] = $params;
+        $this->routes[$route] = $params;
     }
-    public function match()
-    {
+    public function match() {
         $url = trim($_SERVER['REQUEST_URI'], '/');
-        foreach ($this->routers as $route => $params) {
-
+        foreach ($this->routes as $route => $params) {
             if (preg_match($route, $url, $matches)) {
-
+                foreach ($matches as $key => $match) {
+                    if (is_string($key)) {
+                        if (is_numeric($match)) {
+                            $match = (int) $match;
+                        }
+                        $params[$key] = $match;
+                    }
+                }
                 $this->params = $params;
                 return true;
             }
